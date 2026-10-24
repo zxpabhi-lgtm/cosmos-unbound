@@ -1,0 +1,84 @@
+
+[
+  {
+    "id": "big-bang",
+    "title": "The Big Bang Theory",
+    "category": "Cosmology",
+    "summary": "How the observable universe evolved from an early hot, dense state.",
+    "content": [
+      {
+        "heading": "What is the Big Bang?",
+        "text": "The Big Bang model describes the evolution of the observable universe from an early hot, dense state approximately 13.8 billion years ago. It describes the expansion of space, rather than an ordinary explosion into pre-existing empty space."
+      },
+      {
+        "heading": "Evidence for the Big Bang",
+        "text": "Major evidence includes the expansion of the universe, the cosmic microwave background, and the observed abundance of light elements formed during the early universe."
+      },
+      {
+        "heading": "What remains unknown?",
+        "text": "Scientists continue to investigate the earliest moments of cosmic history, the physical origin of the universe, and whether a meaningful earlier state existed."
+      }
+    ],
+    "related": ["cosmic-microwave-background", "dark-matter"],
+    "sources": [
+      {
+        "title": "NASA Science: Universe",
+        "url": "https://science.nasa.gov/universe/"
+      }
+    ]
+  },
+  {
+    "id": "black-holes",
+    "title": "Black Holes",
+    "category": "Astrophysics",
+    "summary": "Explore event horizons, extreme gravity, and how astronomers study black holes.",
+    "content": [
+      {
+        "heading": "What is a black hole?",
+        "text": "A black hole is a region of spacetime with an event horizon, a boundary beyond which escape to the distant universe is impossible under known physics."
+      },
+      {
+        "heading": "How do scientists detect them?",
+        "text": "Scientists study the motion of nearby objects, radiation from hot surrounding material, gravitational lensing, and gravitational waves from merging black holes."
+      },
+      {
+        "heading": "Do black holes suck in everything?",
+        "text": "No. Objects can orbit a black hole at a safe distance. Its gravitational influence depends on its mass and the distance from it, just as gravity does for other objects."
+      }
+    ],
+    "related": ["neutron-stars", "gravitational-waves"],
+    "sources": [
+      {
+        "title": "NASA Science: Black Holes",
+        "url": "https://science.nasa.gov/universe/black-holes/"
+      }
+    ]
+  },
+  {
+    "id": "mars",
+    "title": "Mars",
+    "category": "Solar System",
+    "summary": "A rocky planet with ancient river valleys, enormous volcanoes, and evidence of past water.",
+    "content": [
+      {
+        "heading": "Geology and ancient water",
+        "text": "Mars preserves ancient river channels, lake deposits, polar ice, and minerals associated with water. These features suggest that liquid water played an important role in its past."
+      },
+      {
+        "heading": "Could life have existed there?",
+        "text": "No Martian life has been confirmed. Robotic missions investigate ancient environments, geological processes, and organic molecules to understand whether Mars may once have been habitable."
+      },
+      {
+        "heading": "Exploring Mars",
+        "text": "Orbiters map the planet, landers measure its environment, and rovers investigate rocks and sediments. These missions help reconstruct Mars's geological and climatic history."
+      }
+    ],
+    "related": ["solar-system", "search-for-life"],
+    "sources": [
+      {
+        "title": "NASA Science: Mars",
+        "url": "https://science.nasa.gov/mars/"
+      }
+    ]
+  }
+]
