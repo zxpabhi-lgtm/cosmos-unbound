@@ -487,7 +487,43 @@ document.getElementById("library").addEventListener("click",e=>{
 });
 document.getElementById("search").addEventListener("input",renderLibrary);
 document.getElementById("searchbtn").addEventListener("click",()=>{
-  renderLibrary();
+  fetch("./data/articles.json")
+  .then(response => {
+    if (!response.ok) throw new Error("Could not load articles");
+    return response.json();
+  })
+  .then(extraArticles => {
+    extraArticles.forEach(article => {
+      const exists = articles.some(
+        existing => existing.title === article.title
+      );
+
+      if (!exists) {
+        articles.push({
+          ...article,
+          tag: article.category || "Space",
+          image: article.image || "",
+          keywords: article.keywords || "",
+          body: article.body || `
+            <p>${article.summary || ""}</p>
+            ${(article.sections || []).map(section => `
+              <h3>${section.heading}</h3>
+              <p>${section.content}</p>
+            `).join("")}
+            ${(article.sources || []).map(source => `
+              <p><a href="${source.url}" target="_blank" rel="noopener noreferrer">${source.name}</a></p>
+            `).join("")}
+          `
+        });
+      }
+    });
+
+    renderLibrary();
+  })
+  .catch(error => {
+    console.error(error);
+    renderLibrary();
+  });
   document.getElementById("library").scrollIntoView({behavior:"smooth",block:"start"});
 });
 document.getElementById("filters").addEventListener("click",e=>{
