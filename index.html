@@ -1,0 +1,522 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050711">
+<meta name="description" content="COSMOS UNBOUND — Explore the universe, NASA discoveries, planets, galaxies, black holes, space missions and the science of everything beyond Earth.">
+<title>COSMOS UNBOUND — Explore the Universe</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg:#050711;
+  --panel:#0b1020;
+  --panel2:#10182a;
+  --text:#f1f5ff;
+  --muted:#9ba9c4;
+  --blue:#8bbaff;
+  --cyan:#81e4ef;
+  --line:rgba(170,195,255,.14);
+  --gold:#e9c68c;
+}
+* {box-sizing:border-box}
+html {scroll-behavior:smooth;scroll-padding-top:85px}
+body {margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7}
+a {color:inherit;text-decoration:none}
+button,input {font:inherit}
+button {cursor:pointer}
+img {max-width:100%;display:block}
+::selection {background:#547bc8;color:white}
+.wrap {width:min(1160px,calc(100% - 40px));margin:auto}
+header {position:sticky;top:0;z-index:20;background:rgba(5,7,17,.86);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav {min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo {font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:2px;font-size:19px}
+.logo span {color:var(--blue)}
+.navlinks {display:flex;gap:23px;align-items:center}
+.navlinks a {font-size:12px;color:var(--muted)}
+.navlinks a:hover {color:white}
+.menu {display:none;background:none;border:1px solid var(--line);border-radius:9px;color:white;padding:7px 11px}
+.hero {min-height:610px;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(5,7,17,.97),rgba(5,7,17,.67) 54%,rgba(5,7,17,.14)),url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=2000&q=85') center/cover}
+.hero:after {content:"";position:absolute;bottom:0;left:0;right:0;height:140px;background:linear-gradient(transparent,var(--bg));pointer-events:none}
+.hero-content {position:relative;z-index:1;padding:95px 0 120px;max-width:740px}
+.eyebrow {color:var(--cyan);font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700}
+h1,h2,h3 {font-family:'Space Grotesk',sans-serif;line-height:1.18}
+h1 {font-size:clamp(43px,8vw,86px);letter-spacing:-3px;margin:22px 0}
+h1 span {color:var(--blue)}
+.hero p {max-width:610px;color:#c4cee1;font-size:17px}
+.actions {display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn {border:1px solid var(--line);border-radius:8px;padding:12px 18px;background:rgba(255,255,255,.04);color:white;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.primary {background:#dceaff;color:#081020;border-color:#dceaff;font-weight:700}
+.btn:hover {transform:translateY(-2px)}
+.stats {display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--line);padding:25px 0;gap:20px}
+.stat strong {display:block;font:600 25px 'Space Grotesk',sans-serif}
+.stat span {font-size:11px;color:var(--muted)}
+section {padding:76px 0}
+.section-head {display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px}
+.section-head h2 {font-size:clamp(28px,4vw,40px);margin:8px 0}
+.section-head p {color:var(--muted);margin:0;max-width:580px}
+.kicker {font-size:10px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;font-weight:700}
+.searchbox {display:flex;gap:10px;margin:24px 0 18px}
+.searchbox input {min-width:0;flex:1;background:var(--panel);border:1px solid var(--line);border-radius:9px;color:white;padding:15px 17px;outline:none}
+.searchbox input:focus {border-color:var(--blue)}
+.searchbox button {background:#dceaff;color:#07101e;border:0;border-radius:9px;padding:0 19px;font-weight:700}
+.filters {display:flex;gap:8px;flex-wrap:wrap;margin-bottom:25px}
+.filter {padding:7px 13px;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:99px;font-size:12px}
+.filter.active,.filter:hover {background:#172944;color:white;border-color:#42638c}
+.grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card {background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:13px;overflow:hidden;transition:.25s;min-width:0}
+.card:hover {transform:translateY(-4px);border-color:#5278a9}
+.card img {width:100%;height:175px;object-fit:cover;background:#10182a}
+.card-body {padding:19px}
+.tag {font-size:10px;letter-spacing:1px;color:var(--cyan);text-transform:uppercase}
+.card h3 {font-size:20px;margin:8px 0}
+.card p {font-size:13px;color:var(--muted);margin:0 0 15px}
+.read {color:var(--blue);font-size:12px;font-weight:700}
+.empty {color:var(--muted);padding:30px 0}
+.band {background:linear-gradient(120deg,#101b31,#0b1020);border-block:1px solid var(--line)}
+.band-grid {display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.band h2 {font-size:clamp(29px,4vw,43px);margin:12px 0}
+.band p {color:var(--muted)}
+.band img {width:100%;height:330px;object-fit:cover;border-radius:13px;border:1px solid var(--line)}
+.facts {display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.fact {padding:22px;border:1px solid var(--line);background:var(--panel);border-radius:10px}
+.fact strong {color:var(--gold);font-size:13px}
+.fact p {font-size:13px;color:var(--muted);margin-bottom:0}
+.timeline {border-left:1px solid #42638c;margin-left:8px;padding-left:26px;display:grid;gap:25px}
+.event {position:relative}
+.event:before {content:"";position:absolute;width:9px;height:9px;background:var(--cyan);border-radius:50%;left:-31px;top:8px}
+.event small {color:var(--cyan);letter-spacing:1px}
+.event h3 {font-size:18px;margin:5px 0}
+.event p {color:var(--muted);margin:0;font-size:13px}
+.newsletter {border:1px solid var(--line);background:linear-gradient(140deg,#101a2e,#090d1a);padding:30px;border-radius:14px}
+footer {border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:12px}
+.footer-inner {display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a {color:var(--blue)}
+.modal {position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:50;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.open {display:flex}
+.modal-box {width:min(750px,100%);max-height:85vh;overflow:auto;background:#0b1020;border:1px solid #324563;border-radius:14px;padding:28px}
+.modal-close {float:right;background:#172238;border:0;border-radius:7px;color:white;padding:7px 12px}
+.modal-box h2 {font-size:30px}
+.modal-box p,.modal-box li {color:#bdc9dd}
+.modal-box h3 {margin-top:25px}
+.modal-box a {color:var(--blue);text-decoration:underline}
+@media(max-width:800px) {
+ .navlinks {display:none;position:absolute;top:72px;left:0;right:0;background:#080c18;padding:20px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
+ .navlinks.open {display:flex}
+ .menu {display:block}
+ .grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+ .band-grid {grid-template-columns:1fr}
+ .band img {height:240px}
+}
+@media(max-width:520px) {
+ .wrap {width:calc(100% - 28px)}
+ .hero {min-height:570px}
+ .hero-content {padding:70px 0 100px}
+ h1 {letter-spacing:-2px}
+ .stats {grid-template-columns:repeat(2,1fr)}
+ section {padding:55px 0}
+ .section-head {align-items:start;flex-direction:column}
+ .grid,.facts {grid-template-columns:1fr}
+ .card img {height:205px}
+ .searchbox button {padding:0 12px}
+ .modal-box {padding:19px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">COSMOS <span>UNBOUND</span></a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#explore">EXPLORE</a>
+      <a href="#missions">MISSIONS</a>
+      <a href="#discoveries">DISCOVERIES</a>
+      <a href="#facts">COSMIC FACTS</a>
+      <a href="#resources">RESOURCES</a>
+    </nav>
+    <button class="menu" id="menu" aria-label="Toggle navigation">☰</button>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-content">
+    <div class="eyebrow">A living encyclopedia of the cosmos</div>
+    <h1>THE UNIVERSE<br>IS <span>WAITING.</span></h1>
+    <p>From the birth of the first stars to the mysteries of black holes. Explore the discoveries, science, worlds, and unanswered questions that define our place in the cosmos.</p>
+    <div class="actions">
+      <a class="btn primary" href="#explore">Explore the universe ↗</a>
+      <a class="btn" href="#discoveries">Discover the unknown</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap stats">
+  <div class="stat"><strong>13.8B</strong><span>Approximate age of the universe in years</span></div>
+  <div class="stat"><strong>8</strong><span>Recognized planets in our Solar System</span></div>
+  <div class="stat"><strong>100B+</strong><span>Approximate galaxies in the observable universe; estimates vary</span></div>
+  <div class="stat"><strong>∞</strong><span>Questions still waiting for answers</span></div>
+</div>
+
+<section id="explore">
+<div class="wrap">
+  <div class="section-head">
+    <div><div class="kicker">The knowledge library</div><h2>Explore the cosmos.</h2><p>Search the encyclopedia, browse a subject, and open an article to start discovering.</p></div>
+  </div>
+  <div class="searchbox">
+    <input id="search" type="search" placeholder="Search black holes, Mars, Webb, dark matter..." aria-label="Search space encyclopedia">
+    <button id="searchbtn">Search</button>
+  </div>
+  <div class="filters" id="filters">
+    <button class="filter active" data-filter="All">Everything</button>
+    <button class="filter" data-filter="Solar System">Solar System</button>
+    <button class="filter" data-filter="Stars">Stars & galaxies</button>
+    <button class="filter" data-filter="Physics">Cosmic physics</button>
+    <button class="filter" data-filter="Missions">Space missions</button>
+    <button class="filter" data-filter="Life">Life in space</button>
+  </div>
+  <div class="grid" id="library"></div>
+  <p id="count" class="empty"></p>
+</div>
+</section>
+
+<section class="band" id="discoveries">
+<div class="wrap band-grid">
+  <div>
+    <div class="kicker">Discoveries that changed everything</div>
+    <h2>Every answer opens another universe.</h2>
+    <p>Modern astronomy combines powerful telescopes, robotic explorers, physics, mathematics, and decades of observations. Each discovery changes how we understand the cosmos.</p>
+    <p>Explore how scientists test ideas, compare evidence, measure distances, and distinguish what we know from what remains uncertain.</p>
+    <a class="btn primary" href="#library">Browse the knowledge library ↗</a>
+  </div>
+  <img src="https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=1000&q=85" alt="A star-filled view of deep space" loading="lazy">
+</div>
+</section>
+
+<section id="missions">
+<div class="wrap">
+  <div class="section-head">
+    <div><div class="kicker">The explorers</div><h2>Missions beyond Earth.</h2><p>Spacecraft have travelled to distant planets, landed on alien terrain, and captured light from the early universe.</p></div>
+  </div>
+  <div class="grid" id="missiongrid"></div>
+</div>
+</section>
+
+<section id="facts">
+<div class="wrap">
+  <div class="section-head">
+    <div><div class="kicker">Mind-expanding science</div><h2>Cosmic facts.</h2><p>Small windows into some extraordinary features of our universe.</p></div>
+  </div>
+  <div class="facts" id="factgrid"></div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <div class="section-head">
+    <div><div class="kicker">Through cosmic time</div><h2>A timeline of discovery.</h2><p>A few milestones in humanity's journey toward understanding the universe.</p></div>
+  </div>
+  <div class="timeline" id="timeline"></div>
+</div>
+</section>
+
+<section id="resources">
+<div class="wrap">
+  <div class="newsletter">
+    <div class="kicker">Follow the evidence</div>
+    <h2>Go straight to the source.</h2>
+    <p>Explore original images, mission updates, research summaries, and astronomy education from established scientific organizations.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://science.nasa.gov/" target="_blank" rel="noopener noreferrer">NASA Science ↗</a>
+      <a class="btn" href="https://images.nasa.gov/" target="_blank" rel="noopener noreferrer">NASA Image Library ↗</a>
+      <a class="btn" href="https://www.esa.int/" target="_blank" rel="noopener noreferrer">European Space Agency ↗</a>
+      <a class="btn" href="https://www.isro.gov.in/" target="_blank" rel="noopener noreferrer">ISRO ↗</a>
+    </div>
+  </div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="wrap footer-inner">
+  <div><a class="logo" href="#">COSMOS <span>UNBOUND</span></a><p>An independent educational space encyclopedia.</p></div>
+  <div>Educational resource. Scientific estimates may be revised as new evidence emerges.<br>NASA imagery and external resources remain the property of their respective owners.</div>
+</div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+<div class="modal-box">
+<button class="modal-close" id="close">Close ✕</button>
+<div id="modal-content"></div>
+</div>
+</div>
+
+<script>
+const articles = [
+{
+title:"The Big Bang",category:"Physics",tag:"Cosmology",
+image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=700&q=80",
+summary:"How the universe evolved from an extremely hot, dense early state.",
+keywords:"cosmology expansion early universe microwave background inflation",
+body:`<h3>What is the Big Bang?</h3><p>The Big Bang model describes the evolution of the observable universe from an early hot, dense state approximately 13.8 billion years ago. It does not describe an ordinary explosion into pre-existing empty space. Instead, space itself has expanded.</p><h3>Evidence</h3><p>Three major lines of evidence are the expansion of the universe, the cosmic microwave background (relic radiation released when the early universe became transparent), and the observed abundance of light elements produced during primordial nucleosynthesis.</p><h3>What remains unknown?</h3><p>The earliest moments are not completely understood. The physical origin of the Big Bang, whether a meaningful earlier state existed, and the nature of cosmic inflation remain active research questions.</p><p><a href="https://science.nasa.gov/universe/" target="_blank" rel="noopener">Explore NASA's universe science</a></p>`
+},
+{
+title:"Black Holes",category:"Physics",tag:"Extreme physics",
+image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=700&q=80",
+summary:"Regions of spacetime where gravity prevents light from escaping beyond an event horizon.",
+keywords:"gravity singularity event horizon accretion disk relativity spacetime",
+body:`<h3>What is a black hole?</h3><p>A black hole is a region of spacetime bounded by an event horizon. Once something crosses this boundary inward, it cannot escape back to the distant universe using any known physical process.</p><h3>How do they form?</h3><p>Many black holes form when massive stars exhaust their nuclear fuel and their cores collapse. Supermassive black holes reside in many galactic centers, but the complete history of their formation is still being investigated.</p><h3>Can we see one?</h3><p>Black holes do not emit light from inside the event horizon. Astronomers study hot material around them, the motion of nearby stars, gravitational waves from mergers, and the way gravity bends background light.</p><h3>Do they suck in everything?</h3><p>No. At a sufficiently large distance, a black hole's gravity behaves like that of any other object with the same mass. Objects can orbit it without falling in.</p><p><a href="https://science.nasa.gov/universe/black-holes/" target="_blank" rel="noopener">NASA: Black holes</a></p>`
+},
+{
+title:"The Sun",category:"Solar System",tag:"Our star",
+image:"https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=700&q=80",
+summary:"The star whose energy drives Earth's climate, weather, and nearly all surface ecosystems.",
+keywords:"solar flare corona fusion sunspot solar wind heliosphere",
+body:`<h3>Our nearest star</h3><p>The Sun is a roughly 4.6-billion-year-old star made primarily of hydrogen and helium. Its gravity holds the Solar System together, and its radiation supplies most of the energy that powers Earth's surface environment.</p><h3>How does it shine?</h3><p>In its core, nuclear fusion converts hydrogen into helium through a sequence of reactions. A small fraction of the mass involved becomes energy, in accordance with E = mc².</p><h3>Solar activity</h3><p>The Sun's magnetic field creates sunspots, flares, and coronal mass ejections. These events can disturb Earth's magnetosphere, generate auroras, and sometimes affect satellites, radio communications, and power systems.</p><p><a href="https://science.nasa.gov/sun/" target="_blank" rel="noopener">NASA: The Sun</a></p>`
+},
+{
+title:"Mars",category:"Solar System",tag:"The red planet",
+image:"https://images.unsplash.com/photo-1614728263952-84ea256f9679?auto=format&fit=crop&w=700&q=80",
+summary:"A cold desert world with ancient river valleys, giant volcanoes, and evidence of past liquid water.",
+keywords:"perseverance curiosity rover olympus mons water atmosphere mars",
+body:`<h3>A world with a watery past</h3><p>Mars has ancient river channels, lake deposits, minerals that form in the presence of water, polar ice, and a thin carbon-dioxide-rich atmosphere. These features indicate that liquid water played an important role in its past.</p><h3>Could life exist there?</h3><p>No confirmed evidence of Martian life has been found. Robotic missions investigate ancient environments, organic molecules, and geological processes to assess whether Mars was ever habitable.</p><h3>Exploration</h3><p>Orbiters map the planet, landers measure its environment, and rovers study rocks. NASA's Curiosity and Perseverance rovers examine different geological settings, while samples collected by Perseverance are intended to support future scientific investigation.</p><p><a href="https://science.nasa.gov/mars/" target="_blank" rel="noopener">NASA: Mars exploration</a></p>`
+},
+{
+title:"Jupiter",category:"Solar System",tag:"Gas giant",
+image:"https://images.unsplash.com/photo-1630839437035-dac17da580d0?auto=format&fit=crop&w=700&q=80",
+summary:"The largest planet in the Solar System, with powerful storms and a family of fascinating moons.",
+keywords:"great red spot europa ganymede io callisto juno magnetic field",
+body:`<h3>A giant world</h3><p>Jupiter is a gas giant composed mainly of hydrogen and helium. It has no solid surface like Earth. Pressure and temperature increase dramatically deeper into its atmosphere and interior.</p><h3>The Great Red Spot</h3><p>This enormous atmospheric storm has been observed for centuries. Its dimensions and appearance change over time as Jupiter's atmosphere evolves.</p><h3>Four major moons</h3><p>Io is volcanically active. Europa has strong evidence for a subsurface ocean. Ganymede is the largest moon in the Solar System and has its own magnetic field. Callisto preserves a heavily cratered ancient surface.</p><p><a href="https://science.nasa.gov/jupiter/" target="_blank" rel="noopener">NASA: Jupiter</a></p>`
+},
+{
+title:"Saturn",category:"Solar System",tag:"Ringed planet",
+image:"https://images.unsplash.com/photo-1614732484003-ef9881555dc3?auto=format&fit=crop&w=700&q=80",
+summary:"A gas giant surrounded by spectacular rings made primarily of water-ice particles and rocky material.",
+keywords:"cassini titan enceladus rings atmosphere hexagon",
+body:`<h3>Why does Saturn have rings?</h3><p>Saturn's rings consist of countless particles, ranging from tiny grains to larger chunks. Their gravity, collisions, and interactions with Saturn's moons shape ring structures and gaps.</p><h3>Titan and Enceladus</h3><p>Titan has a thick nitrogen-rich atmosphere and lakes and seas of liquid hydrocarbons on its surface. Enceladus ejects water-rich plumes from its south polar region, providing evidence for a subsurface ocean.</p><h3>The Cassini mission</h3><p>NASA, ESA, and the Italian Space Agency collaborated on Cassini-Huygens, which studied Saturn and its system for years. The Huygens probe landed on Titan in 2005.</p><p><a href="https://science.nasa.gov/saturn/" target="_blank" rel="noopener">NASA: Saturn</a></p>`
+},
+{
+title:"The Milky Way",category:"Stars",tag:"Our galaxy",
+image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=700&q=80",
+summary:"The barred spiral galaxy that contains our Solar System and hundreds of billions of stars.",
+keywords:"galaxy spiral stars sagittarius a stellar halo galactic center",
+body:`<h3>Our galactic home</h3><p>The Milky Way is a barred spiral galaxy containing stars, gas, dust, dark matter, and many planetary systems. Our Solar System lies in a smaller spiral feature called the Orion Spur, far from the galactic center.</p><h3>The galactic center</h3><p>The central region contains Sagittarius A*, a supermassive black hole with a mass of roughly four million Suns. Astronomers infer its mass from the orbits of nearby stars and other observations.</p><h3>How do we study it?</h3><p>We observe stars at many wavelengths and use measurements of their positions, distances, and motions to reconstruct the galaxy's structure. Dust obscures much of the visible light toward the central regions, making infrared and radio observations especially valuable.</p><p><a href="https://science.nasa.gov/universe/galaxies/" target="_blank" rel="noopener">NASA: Galaxies</a></p>`
+},
+{
+title:"James Webb Space Telescope",category:"Missions",tag:"Space observatory",
+image:"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=700&q=80",
+summary:"An infrared space observatory studying early galaxies, stars, planetary systems, and exoplanet atmospheres.",
+keywords:"JWST infrared mirror exoplanets early galaxies nebula",
+body:`<h3>What makes Webb special?</h3><p>The James Webb Space Telescope observes mainly infrared light. Its large segmented primary mirror and instruments allow it to investigate faint, distant objects and see through some cosmic dust that obscures visible light.</p><h3>What does it study?</h3><p>Webb observes early galaxies, star formation, planetary systems, and the atmospheres of exoplanets. Its data help scientists test models of galaxy evolution and planetary chemistry.</p><h3>What can it not do?</h3><p>Webb cannot photograph the surface of an Earth-sized exoplanet in the same way a camera photographs Earth. Atmospheric studies generally infer chemical signatures from changes in starlight.</p><p><a href="https://science.nasa.gov/mission/webb/" target="_blank" rel="noopener">NASA: Webb mission</a></p>`
+},
+{
+title:"Exoplanets",category:"Life",tag:"Worlds beyond the Sun",
+image:"https://images.unsplash.com/photo-1614728263952-84ea256f9679?auto=format&fit=crop&w=700&q=80",
+summary:"Planets orbiting stars other than the Sun, from scorching gas giants to potentially rocky worlds.",
+keywords:"habitable zone transit method radial velocity biosignature aliens",
+body:`<h3>How many are there?</h3><p>Thousands of exoplanets have been confirmed. They show that planetary systems are diverse and that planets can orbit stars in arrangements unlike our Solar System.</p><h3>How are they found?</h3><p>The transit method detects periodic dips in starlight when a planet crosses in front of its star. The radial-velocity method measures the star's motion caused by a planet's gravity. Other techniques include direct imaging and microlensing.</p><h3>Could they support life?</h3><p>A planet in its star's habitable zone may have temperatures compatible with liquid water under suitable atmospheric conditions, but location alone does not establish habitability or life. Scientists study atmospheric chemistry and planetary environments to investigate these questions.</p><p><a href="https://science.nasa.gov/exoplanets/" target="_blank" rel="noopener">NASA: Exoplanets</a></p>`
+},
+{
+title:"Dark Matter",category:"Physics",tag:"Cosmic mystery",
+image:"https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=700&q=80",
+summary:"An unseen component inferred from its gravitational effects on galaxies and the large-scale universe.",
+keywords:"gravity galaxy rotation lensing cosmic structure particle",
+body:`<h3>Why do scientists infer dark matter?</h3><p>Stars and galaxies move in ways that visible matter alone cannot adequately explain under standard gravitational models. Gravitational lensing and the growth of cosmic structure provide additional evidence for unseen gravitating matter.</p><h3>What is it made of?</h3><p>Its physical identity remains unknown. Proposed explanations include new particles beyond the established particle physics model. Many searches have tested candidate particles without a definitive detection.</p><h3>Is it the same as dark energy?</h3><p>No. Dark matter behaves gravitationally as an attractive clustering component, while dark energy is the name given to whatever drives the observed accelerated expansion of the universe in the standard cosmological model.</p><p><a href="https://science.nasa.gov/universe/" target="_blank" rel="noopener">NASA: The universe</a></p>`
+},
+{
+title:"Neutron Stars",category:"Stars",tag:"Stellar remnants",
+image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=700&q=80",
+summary:"Ultra-dense stellar remnants formed when the cores of certain massive stars collapse.",
+keywords:"pulsar magnetar supernova gravitational waves dense matter",
+body:`<h3>What is a neutron star?</h3><p>After some massive stars explode, their cores can collapse into objects composed largely of extremely dense nuclear matter. A neutron star can contain more mass than the Sun compressed into a sphere only tens of kilometres across.</p><h3>Pulsars and magnetars</h3><p>Pulsars produce regular pulses of radiation as beams sweep across our line of sight. Magnetars are neutron stars with exceptionally powerful magnetic fields and can produce energetic outbursts.</p><h3>Why are they important?</h3><p>Neutron stars allow scientists to test matter at densities impossible to reproduce in ordinary laboratories. Merging neutron stars also produce gravitational waves and can create heavy elements.</p>`
+},
+{
+title:"Europa",category:"Solar System",tag:"Ocean world",
+image:"https://images.unsplash.com/photo-1614732484003-ef9881555dc3?auto=format&fit=crop&w=700&q=80",
+summary:"An icy moon of Jupiter with strong evidence for a global ocean beneath its surface.",
+keywords:"ocean astrobiology europa clipper ice shell life",
+body:`<h3>A hidden ocean</h3><p>Europa's fractured icy surface, magnetic measurements, and other observations support the existence of a salty liquid ocean beneath the ice. Its thickness and detailed properties remain uncertain.</p><h3>Could it be habitable?</h3><p>Liquid water, chemical ingredients, and possible energy sources make Europa a major target in the search for environments that might support life. Habitability is not proof that life exists there.</p><h3>Exploration</h3><p>NASA's Europa Clipper mission is designed to make repeated close flybys of Europa and investigate its ice shell, ocean, geology, and potential habitability.</p><p><a href="https://science.nasa.gov/jupiter/moons/europa/" target="_blank" rel="noopener">NASA: Europa</a></p>`
+},
+{
+title:"The International Space Station",category:"Missions",tag:"Orbital laboratory",
+image:"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=700&q=80",
+summary:"A continuously crewed orbital laboratory used for scientific research and international cooperation.",
+keywords:"ISS astronauts microgravity experiments orbit earth station",
+body:`<h3>A laboratory in orbit</h3><p>The International Space Station is a multinational orbital research facility. It allows scientists to investigate how living organisms, materials, fluids, and physical systems behave in microgravity.</p><h3>Why conduct research in space?</h3><p>Experiments can reveal how gravity affects biological processes, combustion, fluid movement, and materials. Research also informs technologies and procedures needed for longer human missions.</p><h3>Living in orbit</h3><p>Crews must manage radiation exposure, life support, exercise, sleep, and limited resources. The station also provides a platform for Earth observation and technology demonstrations.</p><p><a href="https://www.nasa.gov/international-space-station/" target="_blank" rel="noopener">NASA: International Space Station</a></p>`
+},
+{
+title:"Voyager 1 and 2",category:"Missions",tag:"Interstellar explorers",
+image:"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=700&q=80",
+summary:"Twin spacecraft that transformed our knowledge of the giant planets and explored interstellar space.",
+keywords:"voyager golden record jupiter saturn uranus neptune heliosphere",
+body:`<h3>A historic journey</h3><p>Launched in 1977, Voyager 1 and Voyager 2 conducted landmark flybys of the outer planets. Voyager 2 remains the only spacecraft to have visited Uranus and Neptune up close.</p><h3>Beyond the heliosphere</h3><p>Both spacecraft crossed the heliopause, the boundary where the solar wind gives way to the interstellar environment. They continue to return measurements as their power supplies decline.</p><h3>The Golden Record</h3><p>Each spacecraft carries a record containing sounds, music, images, and greetings selected to represent aspects of Earth. It is a symbolic message, not evidence that extraterrestrial civilizations have received it.</p><p><a href="https://science.nasa.gov/mission/voyager/" target="_blank" rel="noopener">NASA: Voyager mission</a></p>`
+},
+{
+title:"The Moon",category:"Solar System",tag:"Earth's natural satellite",
+image:"https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?auto=format&fit=crop&w=700&q=80",
+summary:"Earth's natural satellite, a record of early Solar System history and a destination for future exploration.",
+keywords:"lunar geology apollo craters south pole water ice artemis",
+body:`<h3>How did the Moon form?</h3><p>The leading explanation is that a giant impact early in Earth's history produced debris that eventually formed the Moon. Research continues to refine details of this process.</p><h3>What is on the Moon?</h3><p>The lunar surface preserves ancient impact craters, volcanic plains called maria, highlands, and evidence of water-related compounds in several environments. Permanently shadowed polar regions are of special interest because they can preserve water ice.</p><h3>Human exploration</h3><p>The Apollo missions brought astronauts to the Moon between 1969 and 1972. New robotic missions and the Artemis programme aim to expand lunar exploration and investigate resources and environments that could support longer stays.</p><p><a href="https://science.nasa.gov/moon/" target="_blank" rel="noopener">NASA: The Moon</a></p>`
+},
+{
+title:"The Search for Extraterrestrial Life",category:"Life",tag:"Astrobiology",
+image:"https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=700&q=80",
+summary:"How scientists search for habitable environments and possible signs of life beyond Earth.",
+keywords:"aliens astrobiology biosignature SETI mars europa enceladus",
+body:`<h3>What would count as evidence?</h3><p>Scientists investigate geological structures, chemical patterns, atmospheric gases, and other signals that could have biological or non-biological explanations. Strong evidence requires careful testing against alternative explanations.</p><h3>Where do we search?</h3><p>Targets include ancient Mars, Europa, Enceladus, Titan, and the atmospheres of exoplanets. Radio and optical searches also investigate possible technological signals from distant civilizations.</p><h3>Have we found life?</h3><p>There is currently no confirmed scientific evidence of life beyond Earth. The question remains open, and future missions and telescopes may help narrow the possibilities.</p><p><a href="https://science.nasa.gov/astrobiology/" target="_blank" rel="noopener">NASA: Astrobiology</a></p>`
+},
+{
+title:"Dark Energy",category:"Physics",tag:"Cosmic expansion",
+image:"https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=700&q=80",
+summary:"The name given to the unknown cause of the observed acceleration of cosmic expansion.",
+keywords:"cosmological constant expansion universe supernova dark matter",
+body:`<h3>The accelerating universe</h3><p>Observations of distant supernovae in the late 1990s showed that cosmic expansion is accelerating in the standard cosmological interpretation. Other observations, including the cosmic microwave background and large-scale structure, support models that include dark energy.</p><h3>What is it?</h3><p>One explanation is a cosmological constant associated with the energy density of empty space. Other possibilities include evolving fields or changes to our understanding of gravity on cosmic scales.</p><h3>What is known?</h3><p>Dark energy's underlying nature remains unresolved. Measurements of how the expansion rate changes over time are central to distinguishing competing models.</p>`
+},
+{
+title:"Supernovae",category:"Stars",tag:"Stellar explosions",
+image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=700&q=80",
+summary:"Powerful stellar explosions that shape galaxies and distribute newly formed elements.",
+keywords:"star explosion supernova elements white dwarf core collapse",
+body:`<h3>Two broad pathways</h3><p>Core-collapse supernovae occur when the cores of certain massive stars collapse. Type Ia supernovae involve thermonuclear explosions of white dwarfs in particular binary-system conditions.</p><h3>Why do supernovae matter?</h3><p>They eject material into space, enrich the interstellar medium with elements, and can trigger or disrupt star formation. Their remnants reveal information about the explosion and the surrounding environment.</p><h3>Cosmic distance measurements</h3><p>Type Ia supernovae have played an important role in measuring cosmic expansion. They are not perfectly identical, so astronomers calibrate their observed properties before using them as distance indicators.</p>`
+},
+{
+title:"Asteroids and Comets",category:"Solar System",tag:"Small Solar System bodies",
+image:"https://images.unsplash.com/photo-1614732484003-ef9881555dc3?auto=format&fit=crop&w=700&q=80",
+summary:"Ancient remnants of Solar System formation that help reveal how planets developed.",
+keywords:"asteroid comet meteor meteorite impact planetary defense OSIRIS REx",
+body:`<h3>Asteroids</h3><p>Asteroids are rocky or metallic bodies orbiting the Sun, many concentrated in the main asteroid belt between Mars and Jupiter. Their compositions preserve clues to early Solar System conditions.</p><h3>Comets</h3><p>Comets contain ice, dust, and rocky material. As they approach the Sun, heating releases gas and dust, creating a coma and sometimes long tails that point generally away from the Sun under the influence of radiation and the solar wind.</p><h3>Planetary defense</h3><p>Scientists track near-Earth objects to assess potential impact hazards. NASA's DART mission demonstrated that a spacecraft impact can change a small body's orbital motion.</p><p><a href="https://science.nasa.gov/solar-system/asteroids/" target="_blank" rel="noopener">NASA: Asteroids</a></p>`
+},
+{
+title:"Gravitational Waves",category:"Physics",tag:"Ripples in spacetime",
+image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=700&q=80",
+summary:"Ripples in spacetime generated by accelerating masses, including merging black holes and neutron stars.",
+keywords:"LIGO relativity neutron stars black holes astronomy spacetime",
+body:`<h3>What are gravitational waves?</h3><p>Einstein's general theory of relativity predicts disturbances in spacetime that travel outward from changing distributions of mass and energy. Strong detectable signals can arise from compact objects spiralling together and merging.</p><h3>How are they detected?</h3><p>Facilities such as LIGO measure extraordinarily tiny changes in the relative lengths of perpendicular laser-interferometer arms. Virgo and KAGRA contribute to the global detector network.</p><h3>Why is this revolutionary?</h3><p>Gravitational-wave astronomy lets scientists investigate events that may be difficult to observe through light alone and tests gravity under extreme conditions.</p><p><a href="https://www.ligo.caltech.edu/" target="_blank" rel="noopener">LIGO Scientific Collaboration</a></p>`
+}
+];
+
+const missions = [
+{title:"James Webb Space Telescope",category:"Infrared astronomy",image:"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=700&q=80",summary:"Studies early galaxies, stellar nurseries, and distant planetary atmospheres.",url:"https://science.nasa.gov/mission/webb/"},
+{title:"Perseverance Rover",category:"Mars exploration",image:"https://images.unsplash.com/photo-1614728263952-84ea256f9679?auto=format&fit=crop&w=700&q=80",summary:"Investigates Martian geology and collects samples for future study.",url:"https://science.nasa.gov/mission/mars-2020-perseverance/"},
+{title:"Europa Clipper",category:"Ocean worlds",image:"https://images.unsplash.com/photo-1614732484003-ef9881555dc3?auto=format&fit=crop&w=700&q=80",summary:"Investigates Jupiter's moon Europa and its potential habitability.",url:"https://science.nasa.gov/mission/europa-clipper/"},
+{title:"Parker Solar Probe",category:"Solar physics",image:"https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=700&q=80",summary:"Studies the solar corona and the origin of the solar wind.",url:"https://science.nasa.gov/mission/parker-solar-probe/"},
+{title:"Voyager",category:"Interstellar exploration",image:"https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=700&q=80",summary:"Explored the outer planets and continues investigating the interstellar environment.",url:"https://science.nasa.gov/mission/voyager/"},
+{title:"Chandrayaan-3",category:"Indian lunar exploration",image:"https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?auto=format&fit=crop&w=700&q=80",summary:"India's mission achieved a successful lunar landing in August 2023 and deployed the Pragyan rover.",url:"https://www.isro.gov.in/Chandrayaan3.html"}
+];
+
+const facts = [
+["The night sky is a time machine","Because light takes time to travel, distant astronomical objects are observed as they were in the past. The farther away the source, the earlier its observed light may have been emitted."],
+["A day is not always 24 hours","Earth's rotation and orbit define different kinds of days. A solar day averages 24 hours, while a sidereal day is about 23 hours and 56 minutes."],
+["Venus rotates unusually","Venus rotates retrograde relative to most planets. Its rotation is also extremely slow compared with its orbital period."],
+["Space is not completely empty","Interplanetary and interstellar space contain particles, radiation, magnetic fields, dust, and sometimes extremely sparse gas."],
+["The Sun contains most Solar System mass","The Sun accounts for about 99.86% of the Solar System's total mass, overwhelmingly dominating the gravitational system."],
+["Saturn is less dense than water on average","Saturn's mean density is lower than liquid water's density, but the planet is not a solid object that could float in a normal ocean."],
+["The universe has no known central point","In standard cosmology, the expansion of space does not imply a single central location inside the universe from which everything expanded."],
+["Elements have cosmic histories","Many elements were created through stellar fusion, stellar explosions, neutron-star mergers, and other astrophysical processes. Different elements have different formation pathways."]
+];
+
+const timeline = [
+["1543","Heliocentric astronomy","Copernicus published a model placing the Sun at the centre of the known planetary system."],
+["1609–1610","Telescopic astronomy","Galileo's observations of the Moon, Jupiter's moons, and Venus helped transform astronomy."],
+["1957","Sputnik 1","The first artificial satellite launched into Earth orbit, beginning the space age."],
+["1969","Apollo 11","Humans first walked on the Moon during NASA's Apollo 11 mission."],
+["1990","Hubble Space Telescope","Hubble began observations that reshaped studies of stars, galaxies, and cosmic expansion."],
+["1995","First widely accepted exoplanet around a Sun-like star","51 Pegasi b established a new era of planet discovery around other stars."],
+["2015","Gravitational waves detected","LIGO announced the first direct detection of gravitational waves from a black-hole merger."],
+["2021–2022","James Webb launched and released first images","Webb launched in December 2021 and released its first full-colour science images in July 2022."]
+];
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+let activeFilter="All";
+
+function articleCard(a) {
+  const i=articles.indexOf(a);
+  return `<article class="card">
+  <img src="${a.image}" alt="${esc(a.title)}" loading="lazy">
+  <div class="card-body"><div class="tag">${esc(a.tag)}</div>
+  <h3>${esc(a.title)}</h3><p>${esc(a.summary)}</p>
+  <button class="read" data-article="${i}">Explore article ↗</button></div></article>`;
+}
+
+function renderLibrary() {
+  const q=document.getElementById("search").value.trim().toLowerCase();
+  const list=articles.filter(a=>(activeFilter==="All"||a.category===activeFilter)&&
+    (!q||[a.title,a.category,a.tag,a.summary,a.keywords,a.body.replace(/<[^>]*>/g,"")].join(" ").toLowerCase().includes(q)));
+  document.getElementById("library").innerHTML=list.map(articleCard).join("");
+  document.getElementById("count").textContent=list.length ? `${list.length} articles found · This starter library will grow as more articles are added.` : "No matching articles yet. Try a broader search term.";
+}
+
+function renderMissions() {
+  document.getElementById("missiongrid").innerHTML=missions.map((m,i)=>`
+    <article class="card"><img src="${m.image}" alt="${esc(m.title)}" loading="lazy">
+    <div class="card-body"><div class="tag">${esc(m.category)}</div><h3>${esc(m.title)}</h3>
+    <p>${esc(m.summary)}</p><a class="read" href="${m.url}" target="_blank" rel="noopener noreferrer">Official mission resource ↗</a></div></article>`).join("");
+}
+
+function renderFacts() {
+  document.getElementById("factgrid").innerHTML=facts.map(f=>`
+    <article class="fact"><strong>${esc(f[0])}</strong><p>${esc(f[1])}</p></article>`).join("");
+}
+
+function renderTimeline() {
+  document.getElementById("timeline").innerHTML=timeline.map(e=>`
+    <article class="event"><small>${esc(e[0])}</small><h3>${esc(e[1])}</h3><p>${esc(e[2])}</p></article>`).join("");
+}
+
+function openArticle(index) {
+  const a=articles[index];
+  if(!a)return;
+  document.getElementById("modal-content").innerHTML=`
+    <div class="kicker">${esc(a.category)} / ${esc(a.tag)}</div>
+    <h2 id="modal-title">${esc(a.title)}</h2>
+    <p>${esc(a.summary)}</p>
+    ${a.body}
+    <hr style="border-color:#253650;margin:28px 0">
+    <p><strong>Continue exploring:</strong> Search for related terms in the encyclopedia or follow the official science resource linked above.</p>`;
+  document.getElementById("modal").classList.add("open");
+  document.getElementById("close").focus();
+}
+
+document.getElementById("library").addEventListener("click",e=>{
+  const b=e.target.closest("[data-article]");
+  if(b)openArticle(Number(b.dataset.article));
+});
+document.getElementById("search").addEventListener("input",renderLibrary);
+document.getElementById("searchbtn").addEventListener("click",()=>{
+  renderLibrary();
+  document.getElementById("library").scrollIntoView({behavior:"smooth",block:"start"});
+});
+document.getElementById("filters").addEventListener("click",e=>{
+  const b=e.target.closest("[data-filter]");
+  if(!b)return;
+  activeFilter=b.dataset.filter;
+  document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));
+  renderLibrary();
+});
+document.getElementById("menu").addEventListener("click",()=>{
+  document.getElementById("navlinks").classList.toggle("open");
+});
+document.querySelectorAll(".navlinks a").forEach(a=>a.addEventListener("click",()=>{
+  document.getElementById("navlinks").classList.remove("open");
+}));
+document.getElementById("close").addEventListener("click",()=>{
+  document.getElementById("modal").classList.remove("open");
+});
+document.getElementById("modal").addEventListener("click",e=>{
+  if(e.target.id==="modal")document.getElementById("modal").classList.remove("open");
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape")document.getElementById("modal").classList.remove("open");
+});
+
+renderLibrary();
+renderMissions();
+renderFacts();
+renderTimeline();
+</script>
+</body>
+</html>
